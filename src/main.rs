@@ -111,4 +111,29 @@ fn main() {
 
     // Interpolation par nom (Rust 1.58+)
     println!("{nombre} et {texte}"); // 42 et TaskFlow
+
+    // Appel de fonctions
+    let message = saluer("Dimitri");
+    println!("{}", message);
+
+    let resultat = additionner(10, 32);
+    println!("10 + 32 = {}", resultat);
+
+    // if comme expression (pas besoin de ternaire)
+    let age = 25;
+    let categorie = if age < 18 { "mineur" } else { "majeur" };
+    println!("Catégorie : {}", categorie);
+}
+
+// Fonction qui retourne une String
+// &str en paramètre : emprunte le texte sans en prendre possession
+fn saluer(nom: &str) -> String {
+    format!("Bonjour {} depuis TaskFlow !", nom)
+    // Pas de ; → cette expression est la valeur retournée
+    // Équiv Java : return "Bonjour " + nom + " depuis TaskFlow !";
+}
+
+// Fonction qui retourne un i32
+fn additionner(a: i32, b: i32) -> i32 {
+    a + b  // expression finale = valeur de retour
 }
