@@ -18,4 +18,10 @@ fn main() {
         Some(arg) => println!("Premier arg : {}", arg),
         None      => println!("Aucun argument fourni"),
     }
+
+    // cargo run -- hello monde 42
+    // Premier arg : hello
+
+    // cargo run
+    // Aucun argument fourni
 }
