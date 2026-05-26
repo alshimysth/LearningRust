@@ -1,27 +1,17 @@
 use std::env;
 fn main() {
-    // env::args() retourne un itérateur sur les arguments
-    // collect() le matérialise en Vec<String>
     let args: Vec<String> = env::args().collect();
 
-    // Affiche tous les arguments pour comprendre la structure
-    println!("Nombre d'args : {}", args.len());
-    for (i, arg) in args.iter().enumerate() {
-        println!("  args[{}] = {}", i, arg);
-    }
+    // Pattern 1 : match explicite — le plus lisible
+    let nom = match args.get(1) {
+        Some(n) => n.as_str(),   // extrait &str depuis &String
+        None    => "monde",      // valeur par défaut
+    };
 
-    // DANGEREUX : panic si args.len() < 2
-    // let premier = args[1];
+    // Pattern 2 : chaîne de méthodes — le plus compact (idiomatique)
+    let priorite = args.get(2)
+        .map(|s| s.as_str())    // Option<&String> → Option<&str>
+        .unwrap_or("medium");   // Option<&str> → &str
 
-    // SÛR : retourne Option<&String>
-    match args.get(1) {
-        Some(arg) => println!("Premier arg : {}", arg),
-        None      => println!("Aucun argument fourni"),
-    }
-
-    // cargo run -- hello monde 42
-    // Premier arg : hello
-
-    // cargo run
-    // Aucun argument fourni
+    println!("Bonjour {} ! Priorité : {}", nom, priorite);
 }
